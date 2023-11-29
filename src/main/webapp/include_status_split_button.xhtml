@@ -1,0 +1,27 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+	<p:splitButton
+    	icon="pi pi-check-circle"
+    	value="#{empty ctlr.selections ? 'Apply Status' : ctlr.changeStatusLabel()}"
+		disabled="#{empty ctlr.selections}">
+        <p:menuitem value="Open"
+        	action="#{ctlr.changeTxnStatus('OPEN')}" 
+			update="@form">
+			<p:confirm header="Status" 
+				message="Change to Open?" 
+				icon="pi pi-exclamation-triangle"/>
+        </p:menuitem>
+        <p:menuitem value="Closed"
+        	action="#{ctlr.changeTxnStatus('CLOSED')}" 
+			update="@form"
+			oncomplete="PF('wvar').unselectAllRows()">
+			<p:confirm header="Status" 
+				message="Change to Closed?" 
+				icon="pi pi-exclamation-triangle"/>
+        </p:menuitem>
+    </p:splitButton>
+</ui:composition>
